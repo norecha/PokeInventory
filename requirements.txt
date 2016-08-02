@@ -1,1 +1,1 @@
--e git+https://github.com/tejado/pgoapi.git@master#egg=pgoapi
+git+https://github.com/tejado/pgoapi.git@8cafd56fb2fde52f1617fe13d7e75e01bc1f529b#egg=pgoapi

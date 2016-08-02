@@ -58,7 +58,7 @@ class Transfer(object):
 
     @staticmethod
     def are_you_sure(msg):
-        resp = input('\nAre you sure you want to %s? (y/n)' % msg).lower()
+        resp = input('\nAre you sure you want to %s? (y/n) ' % msg).lower()
         if resp == 'y' or resp == 'yes':
             return True
         else:
