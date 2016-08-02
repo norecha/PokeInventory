@@ -920,6 +920,10 @@
         ],
         "Weight": "7.0 kg",
         "Height": "0.4 m",
+        "Next Evolution Requirements": {
+            "Amount": 25,
+            "Name": "Nidoran F candies"
+        },
         "Next evolution(s)": [
             {
                 "Number": "030",
@@ -1015,6 +1019,10 @@
         ],
         "Weight": "9.0 kg",
         "Height": "0.5 m",
+        "Next Evolution Requirements": {
+            "Amount": 25,
+            "Name": "Nidoran M candies"
+        },
         "Next evolution(s)": [
             {
                 "Number": "033",

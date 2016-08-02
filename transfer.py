@@ -15,8 +15,13 @@ class Transfer(object):
         self.pokedex = inventory.pokedex
 
     def transfer(self, pokemon_id, name):
-        print('Transferring %s' % name)
-        self.api.release_pokemon(pokemon_id=pokemon_id)
+        print('Transferring %s... ' % name, end="")
+        resp = self.api.release_pokemon(pokemon_id=pokemon_id)
+        res = resp.get('responses', {}).get('RELEASE_POKEMON', {}).get('result', {0})
+        if res == 1:
+            print('DONE')
+        else:
+            print('FAILED')
         time.sleep(random.uniform(3.0, 6.0))
 
     def transfer_extras(self):
