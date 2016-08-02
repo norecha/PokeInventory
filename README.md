@@ -17,7 +17,7 @@ There are many tools but I couldn't find a simple tool to mass transfer with res
 ### Guide
 ```
 git clone -b master https://github.com/norecha/PokeInventory.git
-cd PokemonGO-IV-Renamer
+cd PokeInventory
 pip install -r requirements.txt (Might need to sudo)
 python inventory.py -a AUTH_SERVICE -u USERNAME -p PASSWORD -lat LAT -lon LON
 ```
