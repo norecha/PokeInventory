@@ -6,17 +6,21 @@ from itertools import groupby
 
 from pgoapi import PGoApi
 
+from renamer import Renamer
 from transfer import Transfer
+from evolve import Evolve
 
 
 class Inventory(object):
     def __init__(self):
+        self.ITEM_LUCKY_EGG = 301
         self.config = None
         self.api = None
         self.logger = logging.getLogger(__name__)
         self.pokedex = {}
         self.pokemons = collections.OrderedDict()
         self.candies = {}
+        self.lucky_egg_count = 0
 
     def init_config(self):
         self.logger.info("Initializing config...")
@@ -48,14 +52,19 @@ class Inventory(object):
         self.api.login(self.config.auth, self.config.username, self.config.password, self.config.latitude,
                        self.config.longitude, 10, app_simulation=False)
 
-    def get_pokemons(self):
+    def get_inventory(self):
         self.logger.info("Getting pokemon list...")
         pokemon_list = []
         inventory = self.api.get_inventory()['responses']['GET_INVENTORY']['inventory_delta']['inventory_items']
         for item in inventory:
+            inventory_item_data = item['inventory_item_data']
+
+            if not inventory_item_data:
+                continue
+
             # pokemon
-            if 'inventory_item_data' in item and 'pokemon_data' in item['inventory_item_data']:
-                pokemon = item['inventory_item_data']['pokemon_data']
+            if 'pokemon_data' in inventory_item_data:
+                pokemon = inventory_item_data['pokemon_data']
 
                 if 'is_egg' in pokemon and pokemon['is_egg']:
                     continue
@@ -85,9 +94,13 @@ class Inventory(object):
                 })
 
             # candy
-            if 'inventory_item_data' in item and 'candy' in item['inventory_item_data']:
-                candy = item['inventory_item_data']['candy']
+            if 'candy' in inventory_item_data:
+                candy = inventory_item_data['candy']
                 self.candies[candy['family_id']] = candy['candy']
+
+            # lucky egg
+            if 'item' in inventory_item_data and inventory_item_data['item']['item_id'] == self.ITEM_LUCKY_EGG:
+                self.lucky_egg_count = inventory_item_data['item']['count']
 
         # group by name and sort by iv
         pokemon_list = sorted(pokemon_list, key=lambda p: p['name'])
@@ -103,6 +116,19 @@ class Inventory(object):
                                                          self.candies.get(poke['pid'], None)))
             print()
 
+    @staticmethod
+    def ask_question(msg):
+        resp = input('\n%s (y/n) ' % msg).lower()
+        if resp == 'y' or resp == 'yes':
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def get_min_to_keep(explanation=""):
+        return int(input('How many pokemon you want to keep minimum?\n' +
+                         explanation))
+
     def show_menu(self):
         print()
         print('  MAIN MENU')
@@ -110,6 +136,7 @@ class Inventory(object):
         print('  1: View Pokemon List')
         print('  2: Transfer Menu')
         print('  3: Evolve Menu')
+        print('  4: Rename Menu')
         print('  0: Exit')
         choice = int(input("\nEnter choice: "))
         if choice == 1:
@@ -117,7 +144,9 @@ class Inventory(object):
         elif choice == 2:
             Transfer(self).run()
         elif choice == 3:
-            pass
+            Evolve(self).run()
+        elif choice == 4:
+            Renamer(self).run()
         elif choice == 0:
             quit()
         else:
@@ -126,7 +155,7 @@ class Inventory(object):
     def run(self):
         self.init_config()
         self.init_api()
-        self.get_pokemons()
+        self.get_inventory()
         while True:
             self.show_menu()
 
