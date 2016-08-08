@@ -4,11 +4,13 @@ There are many tools but I couldn't find a simple tool to mass transfer with res
 - Transfer
   - Transfer all duplicates
   - Transfer pokemons you cannot evolve(For example: If you have 36 pidgey candies, keep top 3; transfer the rest)
+    - It will only transfer pokemons at first evolution
 - Evolve
   - (Pop a lucky egg optionally) Evolve everything you can
+    - It will only evolve pokemons at first evolution
 - Rename above certain IV
  
-Note: When sorting pokemons of same type IV is prioritized over CP. You can optionally pass -cp argument so specify not transfer anything above certain cp
+Note: When sorting pokemons of same type IV is prioritized over CP. You can optionally pass -cp argument to specify not to transfer anything above certain cp which is 1000 by default.
 
 ## Installation
 
