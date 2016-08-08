@@ -6,6 +6,7 @@ There are many tools but I couldn't find a simple tool to mass transfer with res
   - Transfer pokemons you cannot evolve(For example: If you have 36 pidgey candies, keep top 3; transfer the rest)
 - Evolve
   - (Pop a lucky egg optionally) Evolve everything you can
+- Rename above certain IV
 
 ## Installation
 
