@@ -7,7 +7,7 @@ There are many tools but I couldn't find a simple tool to mass transfer with res
 - Evolve
   - (Pop a lucky egg optionally) Evolve everything you can
 - Rename above certain IV
-- 
+ 
 Note: When sorting pokemons of same type IV is prioritized over CP. You can optionally pass -cp argument so specify not transfer anything above certain cp
 
 ## Installation
