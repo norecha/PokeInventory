@@ -21,15 +21,10 @@ git clone -b master https://github.com/norecha/PokeInventory.git
 cd PokeInventory
 pip install -r requirements.txt (Might need to sudo)
 python inventory.py -a AUTH_SERVICE -u USERNAME -p PASSWORD -lat LAT -lon LON
-```
 
-| Argument             | Description                                   | Required |
-| -------------------- | --------------------------------------------- | -------- |
-| `-a`, `--auth`       | Login service, `google` or `ptc`              | yes      |
-| `-u`, `username`     | Username                                      | yes      |
-| `-p`, `password`     | Password                                      | yes      |
-| `-lat`, `latitude`   | Latitude as floating point                    | yes      |
-| `-lon`, `longitude`  | Longitude as floating point                   | yes      |
+Help:
+python inventory.py --help
+```
 
 ## Credits
 - [tejado](https://github.com/tejado) for the API
