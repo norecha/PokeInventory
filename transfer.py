@@ -13,6 +13,7 @@ class Transfer(object):
         self.pokemons = inventory.pokemons
         self.candies = inventory.candies
         self.pokedex = inventory.pokedex
+        self.mincp = inventory.config.mincp
 
     def transfer_service(self, pokemon_id, name):
         print('Transferring %s... ' % name, end="")
@@ -47,10 +48,10 @@ class Transfer(object):
             keeping = max(math.ceil(my_candies / req_candies), min_keep)
 
             if count > keeping:
-                print('Going to transfer %d %s(s)' % (count - keeping, k))
-                transfer_list[k] = v[keeping:]
+                for poke in v[keeping:]:
+                    if poke['cp'] < self.mincp:
+                        transfer_list.setdefault(k, []).append(poke)
 
-        print('\nYou have %d lucky eggs' % self.inventory.lucky_egg_count)
         if not transfer_list:
             print('\nNothing is available to transfer')
             return
@@ -62,7 +63,9 @@ class Transfer(object):
         min_keep = max(0, self.inventory.get_min_to_keep())
         for k, v in self.pokemons.items():
             if len(v) > min_keep:
-                transfer_list[k] = v[min_keep:]
+                for poke in v[min_keep:]:
+                    if poke['cp'] < self.mincp:
+                        transfer_list.setdefault(k, []).append(poke)
         self.transfer_list(transfer_list)
 
     def run(self):

@@ -32,6 +32,8 @@ class Inventory(object):
         parser.add_argument("-t", "--token", type=str)
         parser.add_argument("-lat", "--latitude", required=True, type=float)
         parser.add_argument("-lon", "--longitude", required=True, type=float)
+        parser.add_argument("-cp", "--mincp", type=int, default=1000, help="Min CP to keep regardless of IV"
+                                                                           " during transfers")
 
         self.config = parser.parse_args()
 
@@ -111,7 +113,7 @@ class Inventory(object):
         print()
         for k, g in pokemon_list.items():
             for poke in g:
-                print("%s %.2f%% (%s,%s,%s) CP %s %s" % (poke['name'], poke['iv'], poke['attack'], poke['defense'],
+                print("%s %.2f%% (%s,%s,%s) CP-%s %s" % (poke['name'], poke['iv'], poke['attack'], poke['defense'],
                                                          poke['stamina'], poke['cp'],
                                                          self.candies.get(poke['pid'], None)))
             print()
