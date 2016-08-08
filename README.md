@@ -7,6 +7,8 @@ There are many tools but I couldn't find a simple tool to mass transfer with res
 - Evolve
   - (Pop a lucky egg optionally) Evolve everything you can
 - Rename above certain IV
+- 
+Note: When sorting pokemons of same type IV is prioritized over CP. You can optionally pass -cp argument so specify not transfer anything above certain cp
 
 ## Installation
 
@@ -20,7 +22,7 @@ There are many tools but I couldn't find a simple tool to mass transfer with res
 git clone -b master https://github.com/norecha/PokeInventory.git
 cd PokeInventory
 pip install -r requirements.txt (Might need to sudo)
-python inventory.py -a AUTH_SERVICE -u USERNAME -p PASSWORD -lat LAT -lon LON
+python inventory.py -a AUTH_SERVICE -u USERNAME -p PASSWORD -lat LAT -lon LON [-cp MINCP]
 
 Help:
 python inventory.py --help
