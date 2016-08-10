@@ -69,7 +69,9 @@ class Evolve(object):
                 if res == 1:
                     print('Popped a lucky egg')
                 else:
-                    raise ValueError('Unable to use a lucky egg, try without it, maybe you already have one active')
+                    raise ValueError(
+                        'Response: %d Unable to use a lucky egg, try without it, maybe you already have one active' %
+                        res)
             except Exception as e:
                 print('Exception: Unable to use a lucky egg, try without it, maybe you already have one active')
                 raise e

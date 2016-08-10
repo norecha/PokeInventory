@@ -33,7 +33,7 @@ class Inventory(object):
         parser.add_argument("-lat", "--latitude", required=True, type=float)
         parser.add_argument("-lon", "--longitude", required=True, type=float)
         parser.add_argument("-cp", "--mincp", type=int, default=1000, help="Min CP to keep regardless of IV"
-                                                                           " during transfers")
+                                                                           " during transfers. Default=1000")
 
         self.config = parser.parse_args()
 
@@ -102,7 +102,7 @@ class Inventory(object):
 
             # lucky egg
             if 'item' in inventory_item_data and inventory_item_data['item']['item_id'] == self.ITEM_LUCKY_EGG:
-                self.lucky_egg_count = inventory_item_data['item']['count']
+                self.lucky_egg_count = inventory_item_data['item'].get('count', 0)
 
         # group by name and sort by iv
         pokemon_list = sorted(pokemon_list, key=lambda p: p['name'])
