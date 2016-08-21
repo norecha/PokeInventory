@@ -98,7 +98,7 @@ class Inventory(object):
             # candy
             if 'candy' in inventory_item_data:
                 candy = inventory_item_data['candy']
-                self.candies[candy['family_id']] = candy['candy']
+                self.candies[candy['family_id']] = candy.get('candy', 0)
 
             # lucky egg
             if 'item' in inventory_item_data and inventory_item_data['item']['item_id'] == self.ITEM_LUCKY_EGG:
